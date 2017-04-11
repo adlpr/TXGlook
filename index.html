@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="txg">
+
+  <head>
+    <title>TXGlook</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Alex DelPriore" />
+    <meta name="keywords" content="tangut, tangut script, тангутский, 西夏, 西夏語, 西夏文, 西夏文字" />
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <!-- end favicons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/txglook.css" />
+  </head>
+
+  <body>
+    
+    <ul class="nav nav-pills nav-stacked">
+      <li class="active"><a data-toggle="pill" href="#component-tab" onclick="clearStrokeEntryField();">Components</a></li>
+      <li><a data-toggle="pill" href="#stroke-tab" onclick="clearComponents();">Strokes</a></li>
+    </ul>
+    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12" id="header">TXGlook</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <textarea id="output"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2 col-sm-push-10" id="dir-buttons">
+          <img src="./img/arrow_ltr.png" title="Left to right" onclick='switchWritingMode("horizontal-tb");'/><img src="./img/arrow_ttb.png" title="Top to bottom" onclick='switchWritingMode("vertical-rl");'/>
+        </div>
+        <div class="col-sm-10 col-sm-pull-2" id="rollover-info">
+          <!-- rollover info goes here -->
+        </div>
+      </div>
+      <div class="row" id="search-results">
+        <div class="col-sm-12">
+          <div class="results-viewport">
+            <ul id="result-list" class="results-wrapper">
+              <!-- result list -->
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tab-content">
+        
+        <div class="tab-pane active" id="component-tab">
+          <div class="row">
+            <div class="col-sm-12" id="component-pane">
+              <div class="container-fluid" id="component-table">
+                <!-- component table -->
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-pane" id="stroke-tab">
+          <div class="row">
+            <div class="col-sm-12" id="stroke-pane">
+              <input type="text" id="stroke-entry-field" />
+              <span class="glyphicon glyphicon-remove" title="Clear strokes" onclick="clearStrokeEntryField();"></span>
+              
+              <div class="container-fluid" id="stroke-table">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="thumbnail" onclick="insertStroke('A');">
+                      <div class="caption">Ａ</div>
+                      <img src="./img/strokes/A.png" title="A" alt="𘠀" />
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('B');">
+                      <div class="caption">Ｂ</div>
+                      <img src="./img/strokes/B.png" title="B" alt="𘠁"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('C');">
+                      <div class="caption">Ｃ</div>
+                      <img src="./img/strokes/C.png" title="C" alt="𘠂"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('D');">
+                      <div class="caption">Ｄ</div>
+                      <img src="./img/strokes/D.png" title="D" alt="㇔"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('E');">
+                      <div class="caption">Ｅ</div>
+                      <img src="./img/strokes/E.png" title="E" alt="㇕"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('F');">
+                      <div class="caption">Ｆ</div>
+                      <img src="./img/strokes/F.png" title="F" alt="㇈"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('G');">
+                      <div class="caption">Ｇ</div>
+                      <img src="./img/strokes/G.png" title="G" alt="𘠃"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('H');">
+                      <div class="caption">Ｈ</div>
+                      <img src="./img/strokes/H.png" title="H" alt="𘠄"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('I');">
+                      <div class="caption">Ｉ</div>
+                      <img src="./img/strokes/I.png" title="I" alt="𘠅"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('J');">
+                      <div class="caption">Ｊ</div>
+                      <img src="./img/strokes/J.png" title="J" alt="㇡"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('K');">
+                      <div class="caption">Ｋ</div>
+                      <img src="./img/strokes/K.png" title="K" alt="[橫折橫]"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('L');">
+                      <div class="caption">Ｌ</div>
+                      <img src="./img/strokes/L.png" title="L" alt="㇗"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('M');">
+                      <div class="caption">Ｍ</div>
+                      <img src="./img/strokes/M.png" title="M" alt="𘠆"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('N');">
+                      <div class="caption">Ｎ</div>
+                      <img src="./img/strokes/N.png" title="N" alt="[橫撇點提]"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('O');">
+                      <div class="caption">Ｏ</div>
+                      <img src="./img/strokes/O.png" title="O" alt="𘠈"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('P');">
+                      <div class="caption">Ｐ</div>
+                      <img src="./img/strokes/P.png" title="P" alt="𘠉"/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('Q');">
+                      <div class="caption">Ｑ</div>
+                      <img src="./img/strokes/Q.png" title="Q" alt="㇏"/>
+                    </div>
+                    <!-- <div class="thumbnail" onclick="insertStroke('R');">
+                      <div class="caption">Ｒ</div>
+                      <img src="./img/strokes/R.png" title="R" alt="㇀"/>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+        
+      <div class="row">
+        <div class="col-sm-12" id="footer">
+          <a href="https://github.com/adlpr/TXGlook">v1.0</a> ・ by <a href="http://adelpriore.com/">Alex DelPriore</a> ・ <a href="http://www.babelstone.co.uk/Fonts/Yinchuan.html">Tangut Yinchuan font © Prof. Jing Yongshi 景永时</a>
+        </div>
+      </div>
+    </div>
+
+  </body>
+    
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="./js/txglook-data.js"></script>
+  <script type="text/javascript" src="./js/txglook.js"></script>
+
+</html>
