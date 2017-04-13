@@ -8,13 +8,6 @@ $(function() {
     else
       $(this).removeClass('glyphicon-minus-sign').addClass('glyphicon-plus-sign');
   });
-  // Scroll arrows
-  $(".results-prev").click(function(){
-      $(".results-viewport").animate({scrollLeft: "-="+100});
-  });
-  $(".results-next").click(function(){
-      $(".results-viewport").animate({scrollLeft: "+="+100});
-  });
 });
 /* end jQuery initializations */
 
@@ -301,7 +294,6 @@ function clearStrokeEntryField() {
   updateStrokeEntry();
   updateResultsList();
 }
-
 
 
 // on-document-load stuff
