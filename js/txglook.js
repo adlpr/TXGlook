@@ -215,10 +215,10 @@ function updateResultsList() {
     var tangraphScores = {}
     for (var tangraph in tangraphInfo) {
       var ratioActivatedComponent1InIDS      = ratioOfSubstrings(activatedComponents[1], tangraphInfo[tangraph][0]);
-      var ratioActivatedComponent1InExtended = ratioOfSubstrings(activatedComponents[1], tangraphInfo[tangraph][1]);
       var ratioActivatedComponent2InIDS      = ratioOfSubstrings(activatedComponents[2], tangraphInfo[tangraph][0]);
-      var ratioActivatedComponent2InExtended = ratioOfSubstrings(activatedComponents[2], tangraphInfo[tangraph][1]);
       var ratioActivatedComponent3InIDS      = ratioOfSubstrings(activatedComponents[3], tangraphInfo[tangraph][0]);
+      var ratioActivatedComponent1InExtended = ratioOfSubstrings(activatedComponents[1], tangraphInfo[tangraph][1]);
+      var ratioActivatedComponent2InExtended = ratioOfSubstrings(activatedComponents[2], tangraphInfo[tangraph][1]);
       var ratioActivatedComponent3InExtended = ratioOfSubstrings(activatedComponents[3], tangraphInfo[tangraph][1]);
       var tangraphScore =
         (((2*ratioActivatedComponent1InIDS)-0.5)      * 1000000.0) + 
@@ -226,7 +226,8 @@ function updateResultsList() {
         (((2*ratioActivatedComponent3InIDS)-0.5)      * 10000.0) + 
         (((2*ratioActivatedComponent1InExtended)-0.5) * 1000.0) + 
         (((2*ratioActivatedComponent2InExtended)-0.5) * 100.0) + 
-        (((2*ratioActivatedComponent3InExtended)-0.5) * 10.0);
+        (((2*ratioActivatedComponent3InExtended)-0.5) * 10.0) -
+        (tangraphInfo[tangraph][0].length - activatedComponents[1].length);
       tangraphScores[tangraph] = tangraphScore;
     }
     
