@@ -26,7 +26,6 @@ function insertComponents(maxPerRow=14) {
     '</div>';
   
   for (var strokeCount in componentList) {
-    if (!componentList.hasOwnProperty(strokeCount)) continue;
     var rowHTML = '';
     rowHTML += '<div class="row component-row">'
     rowHTML += '<div class="col-sm-1 component-stroke-count">' + strokeCount + '</div>'
@@ -58,11 +57,11 @@ function rolloverResult(tangraph) {
 }
 
 
-// update list of result tangraphs on page; max 50
-function updatePageResults(maxChars=50) {
+// update list of result tangraphs on page; max 80
+function updatePageResults(maxChars=80) {
   var resultUl = document.getElementById("result-list");
   resultUl.innerHTML = '';
-  for (var i in resultList) {
+  for (const i in resultList) {
     if (i >= maxChars) break;
     var tangraph = resultList[i];
     resultUl.innerHTML +=
@@ -80,21 +79,21 @@ function insertAtCursor(elementId, char) {
     clearComponents();
   
   var output = document.getElementById(elementId)
-  //IE support
+  // IE support
   if (document.selection) {
-      output.focus();
-      sel = document.selection.createRange();
-      sel.text = char;
+    output.focus();
+    sel = document.selection.createRange();
+    sel.text = char;
   }
-  //MOZILLA and others
+  // others
   else if (output.selectionStart || output.selectionStart == '0') {
-      var startPos = output.selectionStart;
-      var endPos = output.selectionEnd;
-      output.value = output.value.substring(0, startPos)
-          + char
-          + output.value.substring(endPos, output.value.length);
+    var startPos = output.selectionStart;
+    var endPos = output.selectionEnd;
+    output.value = output.value.substring(0, startPos)
+      + char
+      + output.value.substring(endPos, output.value.length);
   } else {
-      output.value += char;
+    output.value += char;
   }
 }
 
@@ -115,11 +114,9 @@ function toggleComponent(component) {
 
 // clear all components
 function clearComponents(component) {
-  for (var component in componentActivationStatus) {
-    if (!componentActivationStatus.hasOwnProperty(component)) continue;
+  for (var component in componentActivationStatus)
     if (componentActivationStatus[component] > 0)
       componentActivationStatus[component] = 0;
-  }
   updatePageComponents();
   updateResultsList();
   insertActiveComponents();
@@ -129,13 +126,10 @@ function clearComponents(component) {
 // change status of components associated with current primary activated ones
 function updateSecondaryAndTertiaryComponents() {
   // first clear all
-  for (var component in componentInfo) {
-    if (!componentInfo.hasOwnProperty(component)) continue;
+  for (var component in componentInfo)
     if (componentActivationStatus[component] > 1)
       componentActivationStatus[component] = 0;
-  }
   for (var component in componentInfo) {
-    if (!componentInfo.hasOwnProperty(component)) continue;
     if (componentActivationStatus[component] == 1) {
       // give components in IDS secondary activation
       ids = Array.from(componentInfo[component][0].replace(/[⿰-⿻]/g, ""));
@@ -155,7 +149,6 @@ function updateSecondaryAndTertiaryComponents() {
 // update display (css classes) of components on page
 function updatePageComponents() {
   for (var component in componentInfo) {
-    if (!componentInfo.hasOwnProperty(component)) continue;
     var componentElement = document.getElementById("component-"+component);
     switch (componentActivationStatus[component]) {
       case 0:
@@ -200,7 +193,6 @@ function updateResultsList() {
     var startsWithSeq = [];
     var containsSeq = [];
     for (var tangraph in tangraphInfo) {
-      if (!tangraphInfo.hasOwnProperty(tangraph)) continue;
       var strokeSeq = tangraphInfo[tangraph][2];
       if (strokeSeq.startsWith(strokesEntered)) {
         startsWithSeq.push(tangraph);
@@ -214,7 +206,6 @@ function updateResultsList() {
     // update currently activated components
     activatedComponents = [[],[],[],[]];
     for (var component in componentInfo) {
-      if (!componentInfo.hasOwnProperty(component)) continue;
       var status = componentActivationStatus[component];
       if (status > 0)
         activatedComponents[status].push(component);
@@ -223,7 +214,6 @@ function updateResultsList() {
     // generate score for each tangraph
     var tangraphScores = {}
     for (var tangraph in tangraphInfo) {
-      if (!tangraphInfo.hasOwnProperty(tangraph)) continue;
       var ratioActivatedComponent1InIDS      = ratioOfSubstrings(activatedComponents[1], tangraphInfo[tangraph][0]);
       var ratioActivatedComponent1InExtended = ratioOfSubstrings(activatedComponents[1], tangraphInfo[tangraph][1]);
       var ratioActivatedComponent2InIDS      = ratioOfSubstrings(activatedComponents[2], tangraphInfo[tangraph][0]);
@@ -231,11 +221,11 @@ function updateResultsList() {
       var ratioActivatedComponent3InIDS      = ratioOfSubstrings(activatedComponents[3], tangraphInfo[tangraph][0]);
       var ratioActivatedComponent3InExtended = ratioOfSubstrings(activatedComponents[3], tangraphInfo[tangraph][1]);
       var tangraphScore =
-        (((2*ratioActivatedComponent1InIDS)-0.5)      * 1000.0) + 
+        (((2*ratioActivatedComponent1InIDS)-0.5)      * 1000000.0) + 
+        (((2*ratioActivatedComponent2InIDS)-0.5)      * 100000.0) + 
+        (((2*ratioActivatedComponent3InIDS)-0.5)      * 10000.0) + 
         (((2*ratioActivatedComponent1InExtended)-0.5) * 1000.0) + 
-        (((2*ratioActivatedComponent2InIDS)-0.5)      * 100.0) + 
         (((2*ratioActivatedComponent2InExtended)-0.5) * 100.0) + 
-        (((2*ratioActivatedComponent3InIDS)-0.5)      * 10.0) + 
         (((2*ratioActivatedComponent3InExtended)-0.5) * 10.0);
       tangraphScores[tangraph] = tangraphScore;
     }
