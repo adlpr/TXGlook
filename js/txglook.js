@@ -184,21 +184,39 @@ function insertActiveComponents() {
 }
 
 
+var lastRegex = "";
+
+// listeners - update with every key press / checkbox change
+var strokeEntryField = document.getElementById("stroke-entry-field");
+window.onkeyup = updateStrokeEntry;
+var strokeBeginsWith = document.getElementById("stroke-begins-with");
+var strokeEndsWith = document.getElementById("stroke-ends-with");
+strokeBeginsWith.addEventListener('change', updateStrokeEntry);
+strokeEndsWith.addEventListener('change', updateStrokeEntry);
+
+
 // repopulate results list based on currently activated components
 function updateResultsList() {
   resultList = [];
   
-  if (strokesEntered != "") {
+  if (strokeEntryField.value != "") {
     // strokes
+    // build regex
+    var strokesRegex = strokeEntryField.value.replace("*",".*");
+    if (strokeBeginsWith.checked)
+      strokesRegex = "^" + strokesRegex;
+    if (strokeEndsWith.checked)
+      strokesRegex += "$";
+    // display characters that start with the sequence
+    // before those that just contain it
     var startsWithSeq = [];
     var containsSeq = [];
     for (var tangraph in tangraphInfo) {
-      var strokeSeq = tangraphInfo[tangraph][2];
-      if (strokeSeq.startsWith(strokesEntered)) {
+      let strokeSeq = tangraphInfo[tangraph][2];
+      if (strokeSeq.search("^"+strokesRegex) >= 0)
         startsWithSeq.push(tangraph);
-      } else if (strokeSeq.includes(strokesEntered)) {
+      else if (strokeSeq.search(strokesRegex) >= 0)
         containsSeq.push(tangraph);
-      }
     }
     resultList = startsWithSeq.concat(containsSeq);
   } else {
@@ -260,29 +278,19 @@ function ratioOfSubstrings(arr, str) {
 }
 
 
-// listener - correct and set variable every key press
-var strokesEntered = "";
-window.onkeyup = updateStrokeEntry;
-
 // insert with click
 function insertStroke(stroke) {
-  document.getElementById("stroke-entry-field").value += stroke;
+  strokeEntryField.value += stroke;
   updateStrokeEntry();
 }
 
 function updateStrokeEntry() {
-  var entered = document.getElementById("stroke-entry-field").value;
-  // alert(strokesEntered);
-  if (entered != strokesEntered) {
-    entered = entered.toUpperCase().replace(/[^A-Q]/g, "");
-    document.getElementById("stroke-entry-field").value = strokesEntered = entered;
-    updateResultsList();
-  }
+  strokeEntryField.value = strokeEntryField.value.toUpperCase().replace(/[^A-Q.*]/g, "");
+  updateResultsList();
 }
 
 function clearStrokeEntryField() {
-  document.getElementById("stroke-entry-field").value = "";
-  updateStrokeEntry();
+  strokeEntryField.value = "";
   updateResultsList();
 }
 

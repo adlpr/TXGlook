@@ -164,13 +164,20 @@ textarea#output {
   max-width: 100%;
 }
 
+#stroke-pane .thumbnail {
+  display: inline-block;
+}
+
+#stroke-pane .checkbox-wrapper {
+  padding: 0 10px;
+}
+
 #stroke-table {
   margin-top: 1.618em;
   font-size: 16px;
 }
 #stroke-table .thumbnail {
   cursor: pointer;
-  display: inline-block;
 }
 #stroke-table img {
   width: 50px;

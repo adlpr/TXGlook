@@ -68,7 +68,9 @@
         <div class="tab-pane" id="stroke-tab">
           <div class="row">
             <div class="col-sm-12" id="stroke-pane">
+              <div class="thumbnail checkbox-wrapper" title="starts with"><label onclick="document.getElementById('stroke-begins-with').checked = !document.getElementById('stroke-begins-with').checked;">^</label> <input type="checkbox" id="stroke-begins-with"/></div>
               <input type="text" id="stroke-entry-field" />
+              <div class="thumbnail checkbox-wrapper" title="ends with"><input type="checkbox" id="stroke-ends-with"/> <label onclick="document.getElementById('stroke-ends-with').checked = !document.getElementById('stroke-ends-with').checked;">$</label></div>
               <span class="glyphicon glyphicon-remove" title="Clear strokes" onclick="clearStrokeEntryField();"></span>
               
               <div class="container-fluid" id="stroke-table">
@@ -142,6 +144,15 @@
                       <div class="caption">Ｑ</div>
                       <img src="./img/strokes/Q.png" title="Q" alt="㇏"/>
                     </div>
+                    <br/>
+                    <div class="thumbnail" onclick="insertStroke('.');">
+                      <div class="caption">．</div>
+                      <img src="./img/strokes/dot.png" title="wildcard: one of any stroke" alt="."/>
+                    </div>
+                    <div class="thumbnail" onclick="insertStroke('*');">
+                      <div class="caption">＊</div>
+                      <img src="./img/strokes/star.png" title="wildcard: zero or more of any stroke" alt="*"/>
+                    </div>
                     <!-- <div class="thumbnail" onclick="insertStroke('R');">
                       <div class="caption">Ｒ</div>
                       <img src="./img/strokes/R.png" title="R" alt="㇀"/>
@@ -157,7 +168,7 @@
         
       <div class="row">
         <div class="col-sm-12" id="footer">
-          <a href="https://github.com/adlpr/TXGlook">v1.1.1</a> ・ by <a href="http://adelpriore.com/">Alex DelPriore</a> ・ <a href="http://www.babelstone.co.uk/Fonts/Yinchuan.html">Tangut Yinchuan font © Prof. Jing Yongshi 景永时</a>
+          <a href="https://github.com/adlpr/TXGlook">v1.2.0</a> ・ by <a href="http://adelpriore.com/">Alex DelPriore</a> ・ <a href="http://www.babelstone.co.uk/Fonts/Yinchuan.html">Tangut Yinchuan font © Prof. Jing Yongshi 景永时</a>
         </div>
       </div>
     </div>
