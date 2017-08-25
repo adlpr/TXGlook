@@ -277,6 +277,10 @@ function ratioOfSubstrings(arr, str) {
   }
 }
 
+function toggleCheckbox(id) {
+  document.getElementById(id).checked = !document.getElementById(id).checked;
+  updateStrokeEntry();
+}
 
 // insert with click
 function insertStroke(stroke) {

@@ -68,9 +68,9 @@
         <div class="tab-pane" id="stroke-tab">
           <div class="row">
             <div class="col-sm-12" id="stroke-pane">
-              <div class="thumbnail checkbox-wrapper" title="starts with"><label onclick="document.getElementById('stroke-begins-with').checked = !document.getElementById('stroke-begins-with').checked;">^</label> <input type="checkbox" id="stroke-begins-with"/></div>
+              <div class="thumbnail checkbox-wrapper" title="starts with"><label onclick="toggleCheckbox('stroke-begins-with')">^</label> <input type="checkbox" id="stroke-begins-with"/></div>
               <input type="text" id="stroke-entry-field" />
-              <div class="thumbnail checkbox-wrapper" title="ends with"><input type="checkbox" id="stroke-ends-with"/> <label onclick="document.getElementById('stroke-ends-with').checked = !document.getElementById('stroke-ends-with').checked;">$</label></div>
+              <div class="thumbnail checkbox-wrapper" title="ends with"><input type="checkbox" id="stroke-ends-with"/> <label onclick="toggleCheckbox('stroke-ends-with')">$</label></div>
               <span class="glyphicon glyphicon-remove" title="Clear strokes" onclick="clearStrokeEntryField();"></span>
               
               <div class="container-fluid" id="stroke-table">
@@ -168,7 +168,7 @@
         
       <div class="row">
         <div class="col-sm-12" id="footer">
-          <a href="https://github.com/adlpr/TXGlook">v1.2.0</a> ・ by <a href="http://adelpriore.com/">Alex DelPriore</a> ・ <a href="http://www.babelstone.co.uk/Fonts/Yinchuan.html">Tangut Yinchuan font © Prof. Jing Yongshi 景永时</a>
+          <a href="https://github.com/adlpr/TXGlook">v1.2.0.1</a> ・ by <a href="http://adelpriore.com/">Alex DelPriore</a> ・ <a href="http://www.babelstone.co.uk/Fonts/Yinchuan.html">Tangut Yinchuan font © Prof. Jing Yongshi 景永时</a>
         </div>
       </div>
     </div>
